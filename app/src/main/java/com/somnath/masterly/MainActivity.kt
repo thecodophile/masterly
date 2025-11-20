@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.somnath.masterly.presentation.screens.home.HomeScreen
 import com.somnath.masterly.presentation.theme.MasterlyTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,34 +23,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MasterlyTheme {
-                Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                /*Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
+                    HomeScreen(modifier = Modifier.padding(innerPadding))
+                } */
+
+
+                HomeScreen(modifier = Modifier)
+
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column {
-        Text(
-            text = "Hello $name!",
-            style = MaterialTheme.typography.titleMedium.copy(
-                fontWeight = FontWeight.SemiBold
-            ),
-            color = MaterialTheme.colorScheme.inverseSurface
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MasterlyTheme {
-        Greeting("Android")
     }
 }
