@@ -1,11 +1,11 @@
 package com.somnath.masterly.presentation.components
 
-import android.nfc.tech.MifareUltralight
-import android.widget.ProgressBar
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,13 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.somnath.masterly.R
-import com.somnath.masterly.presentation.theme.DarkBackground
-import com.somnath.masterly.presentation.theme.LightPrimaryForeground
 
 @Composable
 fun SkillCard(
@@ -50,10 +47,15 @@ fun SkillCard(
         modifier = modifier
             .fillMaxWidth()
             .height(140.dp)
+            .border(
+                width = 2.dp,
+                color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),   // or any color
+                shape = RoundedCornerShape(10.dp) // match surface shape
+            )
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(10.dp),
-        color = DarkBackground,
-        shadowElevation = 8.dp
+        color = MaterialTheme.colorScheme.surface,
+        shadowElevation = 8.dp,
     ) {
         Column(
             modifier = modifier
@@ -72,7 +74,7 @@ fun SkillCard(
                     Text(
                         text = skillName,
                         style = MaterialTheme.typography.titleLarge,
-                        color = LightPrimaryForeground,
+                        color = MaterialTheme.colorScheme.onSurface,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = modifier.weight(1f)
@@ -98,7 +100,7 @@ fun SkillCard(
                     Text(
                         text = "$hoursLogged / $totalHours hours",
                         style = MaterialTheme.typography.bodySmall,
-                        color = LightPrimaryForeground
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -112,16 +114,16 @@ fun SkillCard(
                     Text(
                         text = "Progress",
                         style = MaterialTheme.typography.bodySmall,
-                        color = LightPrimaryForeground
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(modifier = modifier.width(6.dp))
                     Text(
                         text = "$percent%",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = LightPrimaryForeground
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
-                Spacer(modifier = modifier.height(4.dp))
+                Spacer(modifier = modifier.height(8.dp))
                 LinearProgressIndicator(
                     progress = { 0.3f },
                     modifier = Modifier
@@ -138,7 +140,14 @@ fun SkillCard(
     }
 }
 
-@Preview()
+@Preview(
+    name = "Dark Mode",
+    uiMode = UI_MODE_NIGHT_YES
+)
+@Preview(
+    name = "Light Mode",
+    uiMode = UI_MODE_NIGHT_NO
+)
 @Composable
 fun SkillCardPreview(modifier: Modifier = Modifier) {
     SkillCard(
